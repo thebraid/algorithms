@@ -45,7 +45,6 @@ const initArr = [5,4,3,2,1];
 
 
     while (length) {
-        console.log(length);
         sort(arr);
         length = length - 1;
     }
@@ -64,6 +63,8 @@ const initArr = [5,4,3,2,1];
         }
 
     }
+
+    console.log(arr);
 }
 
 bubbleSort();
