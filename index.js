@@ -13,3 +13,4 @@ const reduceArray = (array = data) => {
     console.log(resultObj);
 };
 
+
