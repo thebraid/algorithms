@@ -37,8 +37,10 @@ function createStairs(n) {
 // createStairs(n);
 
 
+const initArr = [5,4,3,2,1];
+
 // пузырьковая сортировка
-function bubbleSort(arr) {
+    function bubbleSort(arr = initArr) {
     let length = arr.length;
 
 
