@@ -54,7 +54,7 @@ const initArr = [5,4,3,2,1];
             let val1 = arr[i];
             let val2 = arr[i+1];
 
-            if (!val2) return;
+            if (typeof val2 === 'undefined') return;
 
             if (val1 > val2) {
                 arr[i] = val2;
