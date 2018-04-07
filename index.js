@@ -67,8 +67,6 @@ const initArr = [5,4,3,2,1];
     console.log(arr);
 }
 
-bubbleSort();
-
 // bSort([4,5, 3,2,1]);
 
 // сортировка вставкой
