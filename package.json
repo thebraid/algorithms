@@ -1,0 +1,24 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thebraid/algorithms.git"
+  },
+  "keywords": [],
+  "author": "klester",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thebraid/algorithms/issues"
+  },
+  "homepage": "https://github.com/thebraid/algorithms#readme",
+  "devDependencies": {
+    "webpack-cli": "^2.0.14",
+    "webpack": "^4.6.0"
+  }
+}
