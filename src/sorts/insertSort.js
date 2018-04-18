@@ -25,5 +25,3 @@ window.insertSort = function(arr = insertArr) {
 
     console.log(arr);
 };
-
-insertSort();
