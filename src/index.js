@@ -6,4 +6,5 @@ const reduceArray = require('./array/reduceArray');
 
 const arraySpiral = require('./array/arraySpiral');
 
-const revertList = require('./other/revertList');
+const revertList = require('./object/revertList');
+const treeDeep = require('./object/treeDeep');
