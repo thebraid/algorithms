@@ -8,3 +8,4 @@ const arraySpiral = require('./array/arraySpiral');
 
 const revertList = require('./object/revertList');
 const treeDeep = require('./object/treeDeep');
+const treeWidth = require('./object/treeWidth');
