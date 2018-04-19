@@ -1,5 +1,3 @@
-const n = 4;
-
 function newArray(width, height) {
     const arr = [];
 
@@ -10,93 +8,90 @@ function newArray(width, height) {
 
     return arr;
 }
-let a = 0;
 
-function changeDirection(arr, n) {
 
-    return (function(){
-        console.log('changeDirection');
-        console.log(a);
-        if (a >= n) {
-            a = 0;
-        }
-        const result = arr[a];
-        a++;
+let a = 1;
+function rotate(direct) {
 
-        return result;
-    })();
+  if (a >= 4) {
+    a = 0;
+  }
+  const result = direct[a];
+  a++;
 
+  return result;
 }
 
-window.arraySpiral = function (n = n) {
-    const count = n * n;
+
+function increase(x, y, dx, dy, arr) {
+  x = x + dx;
+  y = y + dy;
+
+  y = (!arr[y] || arr[y][x] !== '-') ? (y - dy) : y
+  x = (!arr[y][x] || arr[y][x] !== '-') ? (x - dx) : x
+  
+  return [x, y];
+}
+
+// Функция дополняющая число нулями на основании максимального значения.
+// Если будет всего 2 символа, то числа 1-9 будут преобразовы в 01-09
+// Если будет 3 символа, то 1 => 001, 10 => 010.
+// И так далее.
+function padNull(num, length){
+	const maxLength = length.toString().length;
+  let str = num.toString();
+  
+  while (str.length < maxLength) {
+  	str = '0' + str;
+  }
+  
+	return str;
+}
+
+window.arraySpiral = function (a = 4, b) {
+		b = b ? b : a;
+    const count = a * b;
     const direct = [
         [1, 0],   // right
         [0, 1],   // down
         [-1, 0],  // left
         [0, -1]   // top
     ];
-    const arr = newArray(n);
+    const arr = newArray(a, b);
 
-    let x = 0;
-    let y = 0;
+    let x = 0; // указатель во внутреннем массиве [ [1,2,3,4], [], [], []]
+    let y = 0; // указатель во внешнем массиве [ [], [], [], []]
     let dx;
     let dy;
 
     // начальное направление - right
     [dx, dy] = direct[0];
 
-    for (let i = 1; i <= count; i++) {
-        // console.log('i = ', i);
+		for (let i = 1; i <= count; i++) {
+    	i = padNull(i, count);
+      
+      if (arr[y] && arr[y][x] && arr[y][x] === '-') {
+        arr[y][x] = i;
+        [x, y] = increase(x, y, dx, dy, arr);
+      } else {
+      	// Изменяем направление
+      	[dx, dy] = rotate(direct);
+        
+        // Увеличиваем x и y проверяя, не вышли ли мы за пределы.
+        // Если вышли, уменьшаем нужную координату
+        [x, y] = increase(x, y, dx, dy, arr);
+        
 
-        if (arr[y] && arr[y][x] && arr[y][x] === '-') {
-            // console.log('y = ', y);
-            // console.log('x = ', x);
-            // console.log('dy = ', dy);
-            // console.log('dx = ', dx);
-            arr[y][x] = i;
-            x += dx;
-            y += dy;
-        } else {
-            console.log('________START___________');
-
-
-            // console.log(i);
-            // console.log(i%n);
-            // [dx, dy] = direct[i%n];
-            [dx, dy] = changeDirection(direct, n);
-
-            x += dx;
-            y += dy;
-
-            if (x >= arr[0].length) {
-                x = (arr[0].length - 1)
-            } else if (x < 0) {
-                x = 0;
-            }
-
-            if (y >= arr.length) {
-                y = (arr.length - 1)
-            } else if (y < 0) {
-                y = 0;
-            }
-
-            console.log('y = ', y);
-            console.log('x = ', x);
-
-            // console.log('!y = ', y);
-            // console.log('!x = ',x);
-            //
-            //
-            arr[y][x] = i;
-            // console.log(arr[y][x])
-            //
-            x += dx;
-            y += dy;
-        }
+        arr[y][x] = i;
+        // Опять увеличиваем x и y проверяя, не вышли ли мы за пределы.
+        // Если вышли, уменьшаем нужную координату
+        [x, y] = increase(x, y, dx, dy, arr);
+      }
+    	
     }
 
     console.dir(arr)
 };
 
-arraySpiral(n);
+// Пример
+arraySpiral(37, 37);
