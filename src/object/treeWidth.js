@@ -45,8 +45,7 @@ window.treeWidth = function (tree = myTree) {
     		let innerItems = [];
     
         items.forEach(item => {
-            console.log('item = ', item);
-            console.log(item.value)
+            console.log(item.value);
             
             if (item.items) {
             	innerItems = [...innerItems, ...item.items];
@@ -61,5 +60,3 @@ window.treeWidth = function (tree = myTree) {
 
     innerWidth(items)
 };
-
-treeWidth();
