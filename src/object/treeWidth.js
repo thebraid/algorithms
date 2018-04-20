@@ -8,11 +8,21 @@ const myTree = {
                     "value": 4,
                     "items": [
                         {"value": 7},
-                        {"value": 8}
+                        {
+                          "value": 8,
+                          "items": [
+                              {"value": 11},
+                              {"value": 12}
+                          ]
+                        }
                     ]
                 },
                 {
-                    "value": 5
+                    "value": 5,
+                    "items": [
+                        {"value": 9},
+                        {"value": 10}
+                    ]
                 }
             ]
         },
@@ -32,29 +42,21 @@ window.treeWidth = function (tree = myTree) {
     console.log(value);
 
     function innerWidth(items) {
-        items.map(item => {
+    		let innerItems = [];
+    
+        items.forEach(item => {
             console.log('item = ', item);
             console.log(item.value)
-        });
-
-        items.map(item => {
-            console.log(item);
+            
             if (item.items) {
-                innerWidth(item.items)
+            	innerItems = [...innerItems, ...item.items];
             }
 
-            // item.items.map( innerItem => {
-            //     console.log(innerItem.value)
-            // })
-        })
-        // items.map(item => {
-        //     // console.log(item);
-        //     if (item.items) {
-        //         innerWidth(item.items);
-        //     }
-        // });
+        });
 
-
+				if (innerItems.length) {
+        	innerWidth(innerItems);
+        }
     }
 
     innerWidth(items)
