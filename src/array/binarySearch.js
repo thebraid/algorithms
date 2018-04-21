@@ -1,55 +1,53 @@
 // value - число поиска
-// n - кол-во элементов в массиве
+// arr - массив поиска
 
-window.binarySearch = (value, n = 16) => {
-    let findIndex;
-    let leftIndex = 0;
-    let rightIndex = n;
-
-    if (value > n) {
-        console.log(`Значение ${value} нет в массиве`);
-        return;
-    }
-
-    // заполняем массив значениями от 1 до n
+function generateArray(n) {
     const arr = Array(n);
     for (let i = 0; i < n; i++) {
         arr[i] = i + 1;
     }
+    return arr;
+}
 
-    let exit = 0;
+const myArr = generateArray(30);
+
+window.binarySearch = (value = 13, arr = myArr) => {
+    console.log(`Ищем значение ${value} в массиве:`);
+    console.log(arr);
+
+    const n = arr.length - 1;
+    let leftIndex = 0;
+    let rightIndex = n;
+
+    if (value > arr[n]) {
+        console.log(`Значение ${value} нет в массиве`);
+        return;
+    }
 
     function calc() {
-        // находим индекс середины массива
+        // 2 указателя индексов - соседи
+        if (rightIndex - leftIndex === 1) {
+            if (arr[leftIndex] === value) {
+                console.log(leftIndex)
+            } else if (arr[rightIndex] === value) {
+                console.log(rightIndex)
+            } else {
+                console.log('найденного значения нет');
+                return;
+            }
+        }
+
         let index = Math.floor((rightIndex + leftIndex) / 2);
-        // console.log(arr[index]);
         if (value < arr[index]) {
-            console.log('<');
-            console.log('arr[index]');
-            console.log(arr[index]);
             rightIndex = index;
-
-            exit += 1;
-            if (exit > 30) return;
-
             calc();
-            //left
         } else if (value > arr[index]) {
             leftIndex = index;
             calc();
-            //right
         } else {
-            // equal
-            findIndex = index;
-            console.log(findIndex);
+            console.log(`index = ${index}`);
         }
     }
 
     calc();
-
-    console.log(arr);
-
-    // console.log(arr);
 };
-
-binarySearch(-1);
