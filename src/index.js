@@ -6,6 +6,7 @@ const insertSort = require('./sorts/insertSort');
 // array
 const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');
+const binarySearch = require('./array/binarySearch');
 
 // object
 const revertList = require('./object/revertList');
