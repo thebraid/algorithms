@@ -2,6 +2,7 @@
 const bubbleSort = require('./sorts/bubbleSort');
 const choiceSort = require('./sorts/choiceSort');
 const insertSort = require('./sorts/insertSort');
+const mergeSort = require('./sorts/mergeSort');
 
 // array
 const reduceArray = require('./array/reduceArray');
