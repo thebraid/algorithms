@@ -47,5 +47,3 @@ window.mergeSort = function( arr = insertArr) {
 
   console.log(result);
 };
-
-mergeSort();
