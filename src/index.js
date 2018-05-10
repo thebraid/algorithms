@@ -4,6 +4,9 @@ const arraySpiral = require('./array/arraySpiral');
 const binarySearch = require('./array/binarySearch');
 
 // chess
+const bracketBalance = require('./bracketBalance');
+
+// chess
 const chess = require('./chess');
 
 // sort
