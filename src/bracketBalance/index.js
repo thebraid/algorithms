@@ -37,5 +37,3 @@ window.brackets = function (str = test_str ) {
 
   console.log('ошибок нет');
 };
-
-brackets();

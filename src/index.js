@@ -3,11 +3,14 @@ const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');
 const binarySearch = require('./array/binarySearch');
 
-// chess
+// bracketBalance
 const bracketBalance = require('./bracketBalance');
 
 // chess
 const chess = require('./chess');
+
+// segmentOfArea
+const segmentOfArea = require('./segmentOfArea');
 
 // sort
 const bubbleSort = require('./sorts/bubbleSort');
