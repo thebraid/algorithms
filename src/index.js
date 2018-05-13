@@ -18,12 +18,12 @@ const chess = require('./chess');
 const segmentOfArea = require('./segmentOfArea');
 
 // sort
+const callAllSort = require('./sorts/callAllSort');
 const bubbleSort = require('./sorts/bubbleSort');
 const choiceSort = require('./sorts/choiceSort');
 const insertSort = require('./sorts/insertSort');
 const mergeSort = require('./sorts/mergeSort');
 const quickSort = require('./sorts/quickSort');
-const callSortAll = require('./sorts/callSortAll');
 
 
 

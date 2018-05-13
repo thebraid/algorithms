@@ -12,7 +12,7 @@ function generateArray(n) {
 const myArr = generateArray(10);
 
 window.binarySearch = (value = 5, arr = myArr) => {
-    console.log(`Ищем значение ${value} в массиве:`);
+    console.log(`\n Ищем значение ${value} в массиве:`);
     console.log(arr);
 
     const n = arr.length - 1;
@@ -28,9 +28,11 @@ window.binarySearch = (value = 5, arr = myArr) => {
         // 2 указателя индексов - соседи
         if (rightIndex - leftIndex === 1) {
             if (arr[leftIndex] === value) {
-                console.log(leftIndex)
+                console.log(leftIndex);
+              return;
             } else if (arr[rightIndex] === value) {
-                console.log(rightIndex)
+                console.log(rightIndex);
+                return;
             } else {
                 console.log('найденного значения нет');
                 return;
@@ -45,7 +47,7 @@ window.binarySearch = (value = 5, arr = myArr) => {
             leftIndex = index;
             calc();
         } else {
-            console.log(`index = ${index}`);
+            console.log(`index = ${index} \n `);
         }
     }
 
