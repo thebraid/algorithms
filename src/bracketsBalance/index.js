@@ -1,6 +1,6 @@
 const test_str = '{asda asdadasd (asdasd} 5434534}';
 
-window.brackets = function (str = test_str ) {
+window.bracketsBalance = function (str = test_str ) {
   const stack = [];
 
   const openBrackets = {
@@ -25,15 +25,21 @@ window.brackets = function (str = test_str ) {
       if (stack[stack.length - 1] === closeBrackets[str[i]]) {
         stack.pop();
       } else {
-        console.log(`ошибка на позиции ${i}`);
-        const resultStr = str.slice(0, i-1);
         console.log(`исходный текст: "${str}"`);
-        console.log(`ошибка возникла здесь: "${resultStr}_${str[i]}_"`);
+        console.log(`ошибка на позиции ${i}`);
+
+        const resultStr = str.slice(0, i-1);
+        console.log(`ошибка возникла здесь: "${resultStr}>>${str[i]}<<"`);
 
         return;
       }
     }
   }
 
-  console.log('ошибок нет');
+  if (stack.length){
+    console.log('не закрыты все скобки');
+  } else {
+    console.log('ошибок нет');
+  }
+
 };

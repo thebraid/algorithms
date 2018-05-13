@@ -1,10 +1,15 @@
+window.defaultArray = [6, 5, 3, -1, 0, -2, 8, 7, 2, 4, -16, 12, 54, 12, 65];
+
+//man
+const man = require('./man');
+
 // array
 const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');
 const binarySearch = require('./array/binarySearch');
 
 // bracketBalance
-const bracketBalance = require('./bracketBalance');
+const bracketsBalance = require('./bracketsBalance');
 
 // chess
 const chess = require('./chess');
@@ -18,6 +23,7 @@ const choiceSort = require('./sorts/choiceSort');
 const insertSort = require('./sorts/insertSort');
 const mergeSort = require('./sorts/mergeSort');
 const quickSort = require('./sorts/quickSort');
+const callSortAll = require('./sorts/callSortAll');
 
 
 

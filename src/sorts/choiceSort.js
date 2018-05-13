@@ -1,14 +1,11 @@
-// сортировка выбором
-const choiceArr = [7,4,7,9,4,2,7,4,65,24,54,23,12,64,32,36,83,12,15];
-
-window.choiceSort = function (arr = choiceArr) {
-    let length = arr.length - 1;
+window.choiceSort = function (arr = [...defaultArray]) {
+    let length = arr.length;
 
     function getMaxIndex(arr) {
-        let max = 0;
+        let max = arr[0];
         let maxInd = 0;
 
-        for (let i = 0; i <= length; i++) {
+        for (let i = 0; i < length; i++) {
             if (arr[i] > max) {
                 max = arr[i];
                 maxInd = i;
@@ -18,18 +15,23 @@ window.choiceSort = function (arr = choiceArr) {
         return maxInd;
     }
 
-    while(length !== -1) {
+    while(length !== 0) {
         let maxIndex = getMaxIndex(arr);
-        let last = arr[length];
 
-        if (maxIndex === length -1) {
+        // если максимальный элемент самый последний, пропускаем на след. итерацию
+        if (maxIndex === length) {
             length = length - 1;
             continue;
         }
 
-        arr[length] = arr[maxIndex];
+        // иначе меняем местами
+        const last = arr[length - 1];
+
+        arr[length - 1] = arr[maxIndex];
         arr[maxIndex] = last;
 
+
+        // теперь ищем максимальный элемент в суженном диапазоне
         length = length - 1;
     }
 

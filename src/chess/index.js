@@ -83,9 +83,6 @@ window.chess = function(N = 8) {
 
     row++; // ряд с которым работаем теперь
 
-
-    // console.log(field);
-
     setReqursiveQueens(field, row);
 
   }

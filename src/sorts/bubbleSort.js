@@ -1,7 +1,6 @@
 // пузырьковая сортировка
-const initArr = [5,4,3,2,1];
 
-window.bubbleSort = function (arr = initArr) {
+window.bubbleSort = function (arr = [...defaultArray]) {
     let length = arr.length;
 
 

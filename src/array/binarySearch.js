@@ -9,9 +9,9 @@ function generateArray(n) {
     return arr;
 }
 
-const myArr = generateArray(30);
+const myArr = generateArray(10);
 
-window.binarySearch = (value = 13, arr = myArr) => {
+window.binarySearch = (value = 5, arr = myArr) => {
     console.log(`Ищем значение ${value} в массиве:`);
     console.log(arr);
 

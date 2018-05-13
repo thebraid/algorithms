@@ -1,9 +1,4 @@
-// сортировка вставкой
-
-const insertArr = [5,4,3,2,1];
-
-
-window.insertSort = function(arr = insertArr) {
+window.insertSort = function(arr = [...defaultArray]) {
     let length = arr.length - 1;
 
     for (let i = 0; i <= length; i++) {

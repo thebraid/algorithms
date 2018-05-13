@@ -1,6 +1,6 @@
 const insertArr = [6, 5, 3, 1, 8, 7, 2, 4, 16, 65, 12, 54, 12, 65];
 
-window.mergeSort = function( arr = insertArr) {
+window.mergeSort = function( arr = [...insertArr]) {
   let result = [];
 
   for (let i = 0; i < arr.length; i+=1) {
@@ -45,5 +45,5 @@ window.mergeSort = function( arr = insertArr) {
     result = resultInner;
   }
 
-  console.log(result);
+  console.log(result[0]);
 };
