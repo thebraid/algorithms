@@ -7,10 +7,16 @@ class Draw {
     this.pointA = [-5, 1]; // первая точка прямой
     this.pointB = [4, 2]; // вторая точка прямой
 
-
     this.result = []; // массив, куда будем складывать найденные точки пересечения прямой с прямоугольником
   }
 
+  /**
+   * Находит точку пересечения двух прямых
+   * @param {number} a1 - координаты 1 прямой 1й точки
+   * @param {number} a2 - координаты 1 прямой 2й точки
+   * @param {number} b1 - координаты 2 прямой 1й точки
+   * @param {number} b2 - координаты 2 прямой 2й точки
+   */
   findCrossingPoint(a1, a2, b1, b2) {
     const [x1, y1] = a1;
     const [x2, y2] = a2;
@@ -37,7 +43,7 @@ class Draw {
     const y = ( x*(y2-y1) - y2*x1 + y1*x2 ) / (x2 - x1);
 
     if (isNaN(y)) {
-      console.log(`y = ${y}`);
+      // console.log(`y = ${y}`);
       return null;
     }
 
@@ -49,6 +55,9 @@ class Draw {
     if (canvas) canvas.remove();
   }
 
+  /**
+   * Нахождение пересечения прямой со всеми ребрами прямоугольника
+   */
   findCrossingPoints() {
     const [x1, x2, y1, y2] = this.rectCoords;
 
@@ -79,6 +88,9 @@ class Draw {
     })
   }
 
+  /**
+   * Рисует саму рамку
+   */
   drawRectangle() {
     const { rectWidth, rectHeight } = this;
 
@@ -103,6 +115,9 @@ class Draw {
     document.body.appendChild(canvas);
   }
 
+  /**
+   * Рисует координаты
+   */
   drawTextCoords(ctx, correctionX, correctionY) {
     const { rectWidth, rectHeight, rectCoords } = this;
     const [x1, x2, y1, y2] = rectCoords;
@@ -125,6 +140,9 @@ class Draw {
     ctx.fillText(`${x2}:${y1}`, rectWidth - 70, rectHeight - 12);
   }
 
+  /**
+   * Рисует оси в прямоугольнике
+   */
   drawAxis() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -156,6 +174,9 @@ class Draw {
     ctx.stroke();
   }
 
+  /**
+   * Рисует линию внутри прямоугольника
+   */
   drawLine() {
     const {  rectHeight } = this;
 
@@ -188,14 +209,33 @@ class Draw {
     ctx.stroke();
   }
 
+  /**
+   * Вставляет в DOM понель управления для удобного изменения данных
+   */
+  drawInputPanel() {
+    if (document.getElementById('rectAndLine')) return;
+
+    const template = document.getElementById('template');
+    const cloneTemplate = document.importNode(template.content, true).children[0];
+
+    document.body.appendChild(cloneTemplate);
+  }
+
+  /**
+   * Главная функция для отрисовки
+   */
   draw() {
     this.resetResult();
 
+    this.drawInputPanel();
     this.drawRectangle();
     this.drawAxis();
     this.drawLine();
   }
 
+  /**
+   * Сброс данных о найденных точках
+    */
   resetResult() {
     this.result = [];
   }
@@ -235,6 +275,44 @@ class Draw {
     this.pointB = point2;
 
     this.draw();
+  }
+
+  handlerChangeRectCoords() {
+    const value = document.getElementsByClassName('rectAndLine__input')[0].value;
+    if (!value) {
+      console.log('Необходимо ввести данные');
+      return;
+    }
+
+    let coords = value.split(',').map(Number);
+
+    if (coords.length !== 4) {
+      console.log('Необходимо ввести 4 числа');
+      return;
+    }
+
+    const [x1, x2, y1, y2] = coords;
+    this.setRectCoords(x1, x2, y1, y2);
+  }
+
+  handlerChangePointsCoords() {
+    const value1 = document.getElementsByClassName('rectAndLine__input')[1].value;
+    const value2 = document.getElementsByClassName('rectAndLine__input')[2].value;
+
+    if (!value1 && !value2) {
+      console.log('Необходимо ввести координаты обоих точек');
+      return;
+    }
+
+    let point1 = value1.split(',').map(Number);
+    let point2 = value2.split(',').map(Number);
+
+    if (point1.length !== 2 || point2.length !== 2) {
+      console.log('Необходимо ввести по 2 числа для каждой точки');
+      return;
+    }
+
+    this.setPoints(point1, point2);
   }
 }
 

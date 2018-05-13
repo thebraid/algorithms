@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .rectAndLine {
+            display: flex;
+            flex-flow: column;
+            margin-bottom: 50px;
+        }
+        .rectAndLine__row {
+            margin-bottom: 10px;
+        }
+
+        .rectAndLine__row:first-child {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-Алгоритмы
+
+<template id="template">
+    <div class="rectAndLine" id="rectAndLine">
+
+        <label class="rectAndLine__row">
+            Координаты прямоугольника
+            <input class="rectAndLine__input" placeholder="x1, x2, y1, y2"/>
+            <button onclick=rectAndLine.handlerChangeRectCoords()>Применить</button>
+        </label>
+
+        <label class="rectAndLine__row">
+            1 точка прямой
+            <input class="rectAndLine__input" placeholder="x, y"/>
+        </label>
+
+        <label class="rectAndLine__row">
+            2 точка прямой
+            <input class="rectAndLine__input" placeholder="x, y"/>
+        </label>
+        <span>
+            <button onclick=rectAndLine.handlerChangePointsCoords()>Применить</button>
+        </span>
+
+    </div>
+</template>
+
 <script type="text/javascript" src="build/index.js"></script>
 </body>
 </html>
