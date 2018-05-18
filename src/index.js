@@ -34,3 +34,4 @@ const treeWidth = require('./object/treeWidth');
 
 //other
 const findSimpleNumber = require('./other/findSimpleNumber');
+const findPath = require('./other/findPath');
