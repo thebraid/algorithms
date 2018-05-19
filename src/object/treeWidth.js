@@ -1,3 +1,5 @@
+// Обход дерева в ширину
+
 const myTree = {
     "value": 1,
     "items": [

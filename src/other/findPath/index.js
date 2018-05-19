@@ -227,4 +227,4 @@ class pathsOfFloid {
 }
 
 window.floid = new pathsOfFloid(cities, roads, startCityIndex, endCityIndex);
-floid.init();
+// floid.init();
