@@ -62,10 +62,7 @@ class Draw {
     let flag = true;
 
     this.result.forEach(([oldVal1, oldVal2]) => {
-      console.log(`oldVal1=${oldVal1}, val1=${val1}, oldVal2=${oldVal2}, val2=${val2}`);
       if (oldVal1 === val1 && oldVal2 === val2) {
-        console.log('equal');
-        // return false;
         flag = false;
       }
     });
@@ -337,4 +334,3 @@ class Draw {
 }
 
 window.rectAndLine = new Draw();
-rectAndLine.draw();
