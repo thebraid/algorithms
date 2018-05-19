@@ -19,5 +19,3 @@ window.polindrom2 = (str = text) => {
 
   console.log(isEqual);
 };
-
-polindrom2();
