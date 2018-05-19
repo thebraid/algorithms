@@ -4,8 +4,11 @@ class Draw {
     this.rectWidth = Math.abs(this.rectCoords[1]- this.rectCoords[0]); // разница x2 - x1 по модулю
     this.rectHeight = Math.abs(this.rectCoords[3]- this.rectCoords[2]); // разница y2 - y1 по модулю
 
-    this.pointA = [-5, 1]; // первая точка прямой
-    this.pointB = [4, 2]; // вторая точка прямой
+    // this.pointA = [-5, 1]; // первая точка прямой
+    // this.pointB = [4, 2]; // вторая точка прямой
+
+    this.pointA = [-50, -50]; // первая точка прямой
+    this.pointB = [50, 50]; // вторая точка прямой
 
     this.result = []; // массив, куда будем складывать найденные точки пересечения прямой с прямоугольником
   }
@@ -55,6 +58,22 @@ class Draw {
     if (canvas) canvas.remove();
   }
 
+  isNotIdenticalResult([val1, val2]) {
+    let flag = true;
+
+    this.result.forEach(([oldVal1, oldVal2]) => {
+      console.log(`oldVal1=${oldVal1}, val1=${val1}, oldVal2=${oldVal2}, val2=${val2}`);
+      if (oldVal1 === val1 && oldVal2 === val2) {
+        console.log('equal');
+        // return false;
+        flag = false;
+      }
+    });
+
+    return flag;
+  }
+
+
   /**
    * Нахождение пересечения прямой со всеми ребрами прямоугольника
    */
@@ -81,7 +100,7 @@ class Draw {
       if (value[1] > y2) return;
       if (value[1] < y1) return;
 
-      if (value) {
+      if (value && this.isNotIdenticalResult(value)) {
         this.result.push(value);
       }
 
@@ -184,6 +203,7 @@ class Draw {
 
     // если не нашли пересекающихся точек с прямоугольником, ни чего не рисуем
     if (this.result.length !== 2) {
+      console.log(this.result);
       console.log('Нет точек пересечений');
       return;
     }
@@ -317,3 +337,4 @@ class Draw {
 }
 
 window.rectAndLine = new Draw();
+rectAndLine.draw();
