@@ -29,3 +29,4 @@ const chess = require('./other/chess');
 const segmentOfArea = require('./other/segmentOfArea');
 const bracketsBalance = require('./other/bracketsBalance');
 const modules = require('./other/modules');
+const randomInteger = require('./other/randomInteger');

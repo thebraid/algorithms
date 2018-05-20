@@ -1,0 +1,22 @@
+[
+  {
+    "name": "module1",
+    "depend": "module2"
+  },
+  {
+    "name": "module2",
+    "depend": "module3"
+  },
+  {
+    "name": "module2",
+    "depend": "module4"
+  },
+  {
+    "name": "module3",
+    "depend": "module4"
+  },
+  {
+    "name": "module4",
+    "depend": "module1"
+  }
+]
