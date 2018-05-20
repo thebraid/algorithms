@@ -1,4 +1,4 @@
-[Демо]: https://thebraid.github.io/algorithms/
+[Демо](https://thebraid.github.io/algorithms/)  
 В консоли набрать "man()"
 
 1. Сортировка пузырьком :heavy_check_mark:
