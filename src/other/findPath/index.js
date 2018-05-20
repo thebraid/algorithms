@@ -214,6 +214,10 @@ class pathsOfFloid {
   }
 
   init() {
+    const app = document.getElementById('app');
+
+    app.innerHTML = '<img src="./src/other/findPath/graph.png"/>';
+
     this.fillCityRoads();
     this.initMatrix();
     this.search();
@@ -227,4 +231,4 @@ class pathsOfFloid {
 }
 
 window.floid = new pathsOfFloid(cities, roads, startCityIndex, endCityIndex);
-// floid.init();
+floid.init();

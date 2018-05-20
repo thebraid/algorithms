@@ -29,3 +29,5 @@ window.treeDeep = function (tree = myTree) {
 
     items.map(treeDeep)
 };
+
+treeDeep.default = myTree;

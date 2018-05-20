@@ -15,4 +15,4 @@
 15. Полиндром :heavy_check_mark:
 16. Целое число в диапазоне :heavy_check_mark:
 17. Поиск пути между городами :heavy_check_mark:
-18. Модули
+18. Модули :heavy_check_mark:

@@ -29,3 +29,5 @@ window.revertList = function(list = myList, child = null) {
         revertList(list.child, newList)
     }
 };
+
+revertList.default = myList;

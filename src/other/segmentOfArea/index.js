@@ -128,7 +128,9 @@ class Draw {
     ctx.strokeStyle = 'black';
     ctx.stroke();
 
-    document.body.appendChild(canvas);
+    const app = document.getElementById('app');
+
+    app.appendChild(canvas);
   }
 
   /**
@@ -232,10 +234,17 @@ class Draw {
   drawInputPanel() {
     if (document.getElementById('rectAndLine')) return;
 
-    const template = document.getElementById('template');
+    const template = document.getElementById('template_rectAndLine');
     const cloneTemplate = document.importNode(template.content, true).children[0];
 
-    document.body.appendChild(cloneTemplate);
+    const app = document.getElementById('app');
+    app.appendChild(cloneTemplate);
+  }
+
+  init() {
+    document.getElementById('app').innerHTML = '';
+
+    this.draw();
   }
 
   /**

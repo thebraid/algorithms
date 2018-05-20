@@ -62,3 +62,5 @@ window.treeWidth = function (tree = myTree) {
 
     innerWidth(items)
 };
+
+treeWidth.default = myTree;
