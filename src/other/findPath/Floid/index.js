@@ -216,7 +216,7 @@ class pathsOfFloid {
   init() {
     const app = document.getElementById('app');
 
-    app.innerHTML = '<img src="./src/other/findPath/graph.png"/>';
+    app.innerHTML = '<img src="./src/other/findPath/Floid/graph.png"/>';
 
     this.fillCityRoads();
     this.initMatrix();
