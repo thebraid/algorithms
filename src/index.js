@@ -23,10 +23,11 @@ const treeWidth = require('./object/treeWidth');
 
 //other
 const findSimpleNumbers = require('./other/findSimpleNumbers');
-const findPath = require('./other/findPath');
 const polindrome = require('./other/polindrome');
 const chess = require('./other/chess');
 const segmentOfArea = require('./other/segmentOfArea');
 const bracketsBalance = require('./other/bracketsBalance');
 const modules = require('./other/modules');
 const randomInteger = require('./other/randomInteger');
+
+const findPathByFloid = require('./other/findPath/Floid');
