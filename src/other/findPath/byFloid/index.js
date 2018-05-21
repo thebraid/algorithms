@@ -25,14 +25,14 @@ const roads = [
 const startCityIndex = 0;
 const endCityIndex = 4;
 
-class pathsOfFloid {
+class Floid {
   constructor(cities, roads, start, end) {
     this.cities = cities;
     this.roads = roads;
     this.start = start;
     this.end = end;
 
-    this.citiesRoads = Object.assign({});
+    this.citiesRoads = Object.create(null);
     this.matrix = [];
   }
 
@@ -69,7 +69,6 @@ class pathsOfFloid {
         this.matrix[i].push('-')
       }
     }
-
   }
 
   firstFill() {
@@ -143,23 +142,22 @@ class pathsOfFloid {
 
       for (let i = 0; i < resultData.length; i += 1){
         if (i === 0) {
-          result = `${cities[resultData[i].from]}(${resultData[i].from})`;
+          result += `${cities[resultData[i].from]}(${resultData[i].from}) > ${cities[resultData[i].to]}(${resultData[i].to})`;
           continue
         }
 
         if (i === (resultData.length - 1)) {
-          result = `${result} > ${cities[resultData[i].from]}(${resultData[i].from}) > ${cities[resultData[i].to]}(${resultData[i].to})`;
+          result += ` > ${cities[resultData[i].to]}(${resultData[i].to})`;
           continue
         }
 
-        result = `${result} > ${cities[resultData[i].from]}(${resultData[i].from})`;
+        result += `> ${cities[resultData[i].to]}(${resultData[i].to})`;
       }
 
       return result;
 
-    } else {
-      //object
-      return resultData.from;
+    } else { //object
+      return `${resultData.from} > ${resultData.to}`;
     }
   }
 
@@ -173,41 +171,39 @@ class pathsOfFloid {
     console.log(`Необходимо пройти следующий путь: ${path}\n\n`);
   }
 
+  validate(index) {
+      if (index === this.start) {
+          console.log(`Введеное значение равно точке старта`);
+          return false;
+      }
+
+      if (index === this.end) {
+          console.log(`Введеное значение равно точке назначения`);
+          return false;
+      }
+
+      if (index > this.cities.length - 1) {
+          console.log(`Введенное значение ${index} слишком велико. Max значение: ${this.cities.length - 1}`);
+          return false;
+      }
+
+      if (index < 0) {
+          console.log(`Введенное значение ${index} не может быть меньше 0`);
+          return false;
+      }
+
+      return true;
+  }
+
   changeStart(index) {
-    if (index === this.start) {
-      console.log(`Введеное значение равно текущему`);
-      return;
-    }
-
-    if (index === this.end) {
-      console.log(`Введеное значение равно месту назначения`);
-      return;
-    }
-
-    if (index > this.cities.length - 1) {
-      console.log(`Введенное значение ${index} слишком велико. Max значение: ${this.cities.length - 1}`);
-      return;
-    }
+    if(!this.validate(index)) return;
 
     this.start = index;
     this.showResult();
   }
 
   changeEnd(index) {
-    if (index === this.start) {
-      console.log(`Введеное значение равно начальному месту `);
-      return;
-    }
-
-    if (index === this.end) {
-      console.log(`Введеное значение равно текущему`);
-      return;
-    }
-
-    if (index > this.cities.length - 1) {
-      console.log(`Введенное значение ${index} слишком велико. Max значение: ${this.cities.length - 1}`);
-      return;
-    }
+    if(!this.validate(index)) return;
 
     this.end = index;
     this.showResult();
@@ -216,8 +212,9 @@ class pathsOfFloid {
   init() {
     const app = document.getElementById('app');
 
-    app.innerHTML = '<img src="./src/other/findPath/Floid/graph.png"/>';
+    app.innerHTML = '<img src="./src/other/findPath/common/graph.png"/>';
 
+    console.log('Алгоритм Флойда — Уоршелла');
     this.fillCityRoads();
     this.initMatrix();
     this.search();
@@ -230,5 +227,4 @@ class pathsOfFloid {
   }
 }
 
-window.floid = new pathsOfFloid(cities, roads, startCityIndex, endCityIndex);
-floid.init();
+window.floid = new Floid(cities, roads, startCityIndex, endCityIndex);

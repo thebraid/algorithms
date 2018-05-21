@@ -30,4 +30,5 @@ const bracketsBalance = require('./other/bracketsBalance');
 const modules = require('./other/modules');
 const randomInteger = require('./other/randomInteger');
 
-const findPathByFloid = require('./other/findPath/Floid');
+const findPathByFloid = require('./other/findPath/byFloid');
+const findPathByDijkstra = require('./other/findPath/byDijkstra');
