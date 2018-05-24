@@ -72,7 +72,7 @@ class Floid {
   }
 
   firstFill() {
-    const { citiesRoads} = this;
+    const { citiesRoads } = this;
 
     for (let key in citiesRoads) {
       citiesRoads[key].forEach(({to, km}) => {
@@ -169,6 +169,8 @@ class Floid {
 
     const path = this.getPath();
     console.log(`Необходимо пройти следующий путь: ${path}\n\n`);
+
+    console.log(this.citiesRoads);
   }
 
   validate(index) {

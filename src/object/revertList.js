@@ -31,3 +31,17 @@ window.revertList = function(list = myList, child = null) {
 };
 
 revertList.default = myList;
+
+
+// const reverList2 = (first = true, list = myList, child = null) => {
+//     if (list.child === null) {
+//         return {value: list.value, child: child};
+//     } else {
+//         const newChild = {value: list.value, child: child};
+//         const newList = list.child;
+//         return reverList2(newList, newChild);
+//     }
+// };
+//
+// const list2 = reverList2();
+// console.log(list2);

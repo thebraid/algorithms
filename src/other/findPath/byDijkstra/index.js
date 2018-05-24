@@ -175,6 +175,7 @@ class Dijkstra {
 
     showResult() {
         const { start, end } = this;
+        console.log(this.history);
 
         const path = this.history[end].path;
         const distance = this.getDistance(path);

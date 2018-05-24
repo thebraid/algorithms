@@ -14,12 +14,15 @@ const quickSort = require('./sorts/quickSort');
 // array
 const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');
+const getMaxSubSum = require('./array/getMaxSubSum');
 const binarySearch = require('./array/binarySearch');
 
 // object
 const revertList = require('./object/revertList');
 const treeDeep = require('./object/treeDeep');
 const treeWidth = require('./object/treeWidth');
+
+const revertstr = require('./string/revertStr');
 
 //other
 const findSimpleNumbers = require('./other/findSimpleNumbers');

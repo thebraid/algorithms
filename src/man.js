@@ -79,4 +79,5 @@ window.man = () => console.log(`
     modules.makeMistake() - изменит текущие зависимости но новые с циклической зависимостью.
     
     modules.depends - покажет текущие зависимости.
+    
 `);
