@@ -31,6 +31,8 @@ const chess = require('./other/chess');
 const segmentOfArea = require('./other/segmentOfArea');
 const bracketsBalance = require('./other/bracketsBalance');
 const modules = require('./other/modules');
+const permutation = require('./other/permutation');
+const polygonConvexity = require('./other/polygonConvexity');
 const randomInteger = require('./other/randomInteger');
 
 const findPathByFloid = require('./other/findPath/byFloid');

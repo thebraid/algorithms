@@ -1,4 +1,4 @@
-const defaultStr = '1234 56 78'; // 78 56 1234
+const defaultStr = '1234 56 78'; // => 78 56 1234
 
 const revertStr = (str = defaultStr) => {
     let resultStr = '';
