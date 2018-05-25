@@ -11,6 +11,10 @@ const insertSort = require('./sorts/insertSort');
 const mergeSort = require('./sorts/mergeSort');
 const quickSort = require('./sorts/quickSort');
 
+// function
+const compose = require('./function/compose');
+
+
 // array
 const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');

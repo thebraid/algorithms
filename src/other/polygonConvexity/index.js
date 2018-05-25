@@ -128,10 +128,10 @@ window.polygonConvexity = (points = testPoints) => {
     if (!validate(points)) return;
 
     const aggregation = createCombination(points);
-
     const isConvexity = checkPoints(aggregation);
 
     console.log(points);
+
     if (isConvexity) {
         console.log('Многоугольник является выпуклым')
     } else {
@@ -139,4 +139,4 @@ window.polygonConvexity = (points = testPoints) => {
     }
 };
 
-polygonConvexity();
+// polygonConvexity();
