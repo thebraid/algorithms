@@ -104,6 +104,17 @@ eval("const defaultArr = [-1, 2, 3, -9, 11, -5, -2, 35];\n\nwindow.getMaxSubSum 
 
 /***/ }),
 
+/***/ "./src/array/polishNotation.js":
+/*!*************************************!*\
+  !*** ./src/array/polishNotation.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// польская нотация\nconst str = '- * / 15 - 7 + 1 1 3 + 2 + 1 1';\n\nconst isSign = (str) => {\n    switch (str) {\n        case '-':\n        case '+':\n        case '*':\n        case '/':\n            return true;\n        default:\n            return false;\n    }\n};\n\nconst calc = (sign, value1, value2) => {\n    switch(sign) {\n        case '-':\n            return value1 - value2;\n        case '+':\n            return value1 + value2;\n        case '*':\n            return value1 * value2;\n        case '/':\n            return value1 / value2;\n    }\n};\n\nconst collapse = (str) => {\n    let start = 0;\n\n    while(true) {\n        if (str[start] === ' ') {\n            start += 1;\n            continue;\n        }\n\n        if (!isNaN(parseInt(str[start]) && isFinite(str[start]))) {\n            break;\n        } else {\n            start += 1;\n        }\n    }\n\n    for (let i = str.length - 1; i >= start; i-=1) {\n\n        if (isSign(str[i])) {\n            // нашли знак, ищем первые 2 числа справа\n            const op = str[i];\n\n            const operand = [];\n\n            let j;\n            let number = '';\n\n            // +2 (1й знак, 2й пробел)\n            // находим все числа после знака\n            for (j = i + 2; j < str.length; j++) {\n                if (operand.length === 2) break;\n\n                if (str[j] === ' ') {\n                    operand.push(Number(number));\n                    number = '';\n                    continue;\n                }\n\n                if (j === str.length - 1) {\n                    number = number + '' + str[j];\n                    operand.push(Number(number));\n                    continue;\n                }\n\n                if (!isNaN(parseInt(str[j])) && isFinite(str[j])) {\n                    number = number + '' + str[j];\n                }\n            }\n\n            str = (`${str.slice(0, i)}${calc(op, operand[0], operand[1])} ${str.slice(j)}`).trim();\n        }\n    }\n\n    return str;\n};\n\nconst polishNotation = (str) => {\n    let resultStr = collapse(str);\n\n    const recursive = (resultStr) => {\n        const op = resultStr[0];\n\n        let number = '';\n\n        let i;\n        for (i = resultStr.length - 1; i >= 0; i -= 1) {\n            if (resultStr[i] === ' ') {\n                break;\n            } else {\n                number = number + '' + resultStr[i];\n            }\n        }\n\n        resultStr = resultStr.slice(1, i).trim();\n\n        if (!isSign(resultStr[0])) {\n            return calc(op, Number(resultStr), number);\n        } else {\n            return calc(op, recursive(resultStr), number);\n        }\n    };\n\n\n    return recursive(resultStr);\n};\n\n// const result = polishNotation(str);\n// console.log(result);\n\n//# sourceURL=webpack:///./src/array/polishNotation.js?");
+
+/***/ }),
+
 /***/ "./src/array/reduceArray.js":
 /*!**********************************!*\
   !*** ./src/array/reduceArray.js ***!
@@ -112,6 +123,72 @@ eval("const defaultArr = [-1, 2, 3, -9, 11, -5, -2, 35];\n\nwindow.getMaxSubSum 
 /***/ (function(module, exports) {
 
 eval("const data = [\n    {name: 'test1', value: 53},\n    {name: 'test2', value: 2},\n];\n\nwindow.reduceArray = function(array = data) {\n    const resultObj = {};\n\n    for (let i = 0; i < array.length; i++) {\n        resultObj[array[i].name] = array[i].value;\n    }\n\n    console.log(resultObj);\n};\n\n//# sourceURL=webpack:///./src/array/reduceArray.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/bubbleSort.js":
+/*!***************************************!*\
+  !*** ./src/array/sorts/bubbleSort.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// пузырьковая сортировка\n\nwindow.bubbleSort = function (arr = [...defaultArray]) {\n    let length = arr.length;\n\n\n    while (length) {\n        sort(arr);\n        length = length - 1;\n    }\n\n    function sort(arr) {\n        for (let i = 0; i < (arr.length - 1); i++) {\n            let val1 = arr[i];\n            let val2 = arr[i+1];\n\n            if (typeof val2 === 'undefined') return;\n\n            if (val1 > val2) {\n                arr[i] = val2;\n                arr[i+1] = val1;\n            }\n        }\n\n    }\n\n    console.log(arr);\n};\n\n//# sourceURL=webpack:///./src/array/sorts/bubbleSort.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/callAllSort.js":
+/*!****************************************!*\
+  !*** ./src/array/sorts/callAllSort.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("window.callSortAll = function() {\n  console.log('\\n сортировка bubbleSort');\n  bubbleSort();\n\n  console.log('\\n сортировка choiceSort');\n  choiceSort();\n\n  console.log('\\n сортировка insertSort');\n  insertSort();\n\n  console.log('\\n сортировка mergeSort');\n  mergeSort();\n\n  console.log('\\n сортировка quickSort');\n  quickSort();\n  console.log('\\n');\n};\n\n//# sourceURL=webpack:///./src/array/sorts/callAllSort.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/choiceSort.js":
+/*!***************************************!*\
+  !*** ./src/array/sorts/choiceSort.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("window.choiceSort = function (arr = [...defaultArray]) {\n    let length = arr.length;\n\n    function getMaxIndex(arr) {\n        let max = arr[0];\n        let maxInd = 0;\n\n        for (let i = 0; i < length; i++) {\n            if (arr[i] > max) {\n                max = arr[i];\n                maxInd = i;\n            }\n        }\n\n        return maxInd;\n    }\n\n    while(length !== 0) {\n        let maxIndex = getMaxIndex(arr);\n\n        // если максимальный элемент самый последний, пропускаем на след. итерацию\n        if (maxIndex === length) {\n            length = length - 1;\n            continue;\n        }\n\n        // иначе меняем местами\n        const last = arr[length - 1];\n\n        arr[length - 1] = arr[maxIndex];\n        arr[maxIndex] = last;\n\n\n        // теперь ищем максимальный элемент в суженном диапазоне\n        length = length - 1;\n    }\n\n    console.log(arr);\n};\n\n//# sourceURL=webpack:///./src/array/sorts/choiceSort.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/insertSort.js":
+/*!***************************************!*\
+  !*** ./src/array/sorts/insertSort.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("window.insertSort = function(arr = [...defaultArray]) {\n    let length = arr.length - 1;\n\n    for (let i = 0; i <= length; i++) {\n        if (i === 0) continue;\n\n        let y = i;\n        while(y) {\n            if (arr[y] < arr[y-1]) {\n                let small = arr[y];\n                arr[y] = arr[y-1];\n                arr[y-1] = small;\n                y -= 1;\n            } else {\n                // предыдущий элемент массива меньше, можно работать со следующийм элементом\n                break;\n            }\n        }\n    }\n\n    console.log(arr);\n};\n\n\n//# sourceURL=webpack:///./src/array/sorts/insertSort.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/mergeSort.js":
+/*!**************************************!*\
+  !*** ./src/array/sorts/mergeSort.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("window.mergeSort = function( arr = [...defaultArray]) {\n  let result = [];\n\n  // разбили массив на одиночные массивы\n  for (let i = 0; i < arr.length; i+=1) {\n      result.push([arr[i]])\n  }\n\n  // на каждой итерации цикла кол-во элементов массива будет уменьшаться вдвое (т.к. мы соединяем соседние массивы)\n  while (result.length > 1) {\n\n    // массив с новыми соединенными элементами (на каждой итерации исходный массив result будем менять на него)\n    const resultInner = [];\n\n    // проходим по массиву через элемент, параллельно объединяя пары\n    for (let i = 0; i < result.length; i += 2) {\n\n      const leftArr = result[i];    // левый массив\n      const rightArr = result[i+1]; // правый массив\n\n      // массив в который будет складывать отсортированные значения из левого массива и правого.\n      const inner = [];\n\n      // если правого соседа нет, то добавляем левый массив сразу в результат\n      if (!rightArr) {\n        resultInner.push(leftArr);\n        break;\n      }\n\n      // объединяем массивы - \"пары\" до тех пор, пока не закончатся в них элементы\n      while(leftArr.length || rightArr.length) {\n\n        // если элементы закончились в левом массиве, то значит они ещё есть в правом соседе, добавляем оттуда\n        if (leftArr.length === 0) {\n          inner.push(rightArr[0]);\n          rightArr.splice(0, 1);   // удаляем вставленный элемент из правого соседа\n          continue;\n        }\n\n        // если элементы закончились в правом массиве, то значит они ещё есть в левом соседе, добавляем оттуда\n        if (rightArr.length === 0) {\n          inner.push(leftArr[0]);\n          leftArr.splice(0, 1);   // удаляем вставленный элемент из правого соседа\n          continue;\n        }\n\n        // выбираем наименьшее значение из левого и правого массива под индексом 0 и вставляем в промежуточный массив\n        if (leftArr[0] > rightArr[0]) {\n          inner.push(rightArr[0]);\n          rightArr.splice(0, 1)\n        } else {\n          inner.push(leftArr[0]);\n          leftArr.splice(0, 1)\n        }\n      }\n\n      resultInner.push(inner);\n    }\n    result = resultInner;\n  }\n\n  console.log(result[0]);\n};\n\n//# sourceURL=webpack:///./src/array/sorts/mergeSort.js?");
+
+/***/ }),
+
+/***/ "./src/array/sorts/quickSort.js":
+/*!**************************************!*\
+  !*** ./src/array/sorts/quickSort.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("window.quickSort = function() {\n\n  function recursive(arr = [...defaultArray]) {\n    if (arr.length === 0) return [];\n\n    const left = [], right = [], pivot = arr[0];\n\n    for (let i = 1; i < arr.length; i++) {\n      if(arr[i] < pivot)\n        left.push(arr[i]);\n      else\n        right.push(arr[i]);\n    }\n\n    return recursive(left).concat(pivot, recursive(right));\n  }\n\n  console.log(recursive());\n};\n\n\n//# sourceURL=webpack:///./src/array/sorts/quickSort.js?");
 
 /***/ }),
 
@@ -133,7 +210,7 @@ eval("const fn1 = (x) => {\n\n    console.log('сработала fn1');\n    co
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("window.defaultArray = [6, 5, 3, -1, 0, -2, 8, 7, 2, 4, -16, 12, 54, 12, 65];\n\n//man\nconst man = __webpack_require__(/*! ./man */ \"./src/man.js\");\n\n// sort\nconst callAllSort = __webpack_require__(/*! ./sorts/callAllSort */ \"./src/sorts/callAllSort.js\");\nconst bubbleSort = __webpack_require__(/*! ./sorts/bubbleSort */ \"./src/sorts/bubbleSort.js\");\nconst choiceSort = __webpack_require__(/*! ./sorts/choiceSort */ \"./src/sorts/choiceSort.js\");\nconst insertSort = __webpack_require__(/*! ./sorts/insertSort */ \"./src/sorts/insertSort.js\");\nconst mergeSort = __webpack_require__(/*! ./sorts/mergeSort */ \"./src/sorts/mergeSort.js\");\nconst quickSort = __webpack_require__(/*! ./sorts/quickSort */ \"./src/sorts/quickSort.js\");\n\n// function\nconst compose = __webpack_require__(/*! ./function/compose */ \"./src/function/compose.js\");\n\n\n// array\nconst reduceArray = __webpack_require__(/*! ./array/reduceArray */ \"./src/array/reduceArray.js\");\nconst arraySpiral = __webpack_require__(/*! ./array/arraySpiral */ \"./src/array/arraySpiral.js\");\nconst getMaxSubSum = __webpack_require__(/*! ./array/getMaxSubSum */ \"./src/array/getMaxSubSum.js\");\nconst binarySearch = __webpack_require__(/*! ./array/binarySearch */ \"./src/array/binarySearch.js\");\n\n// object\nconst revertList = __webpack_require__(/*! ./object/revertList */ \"./src/object/revertList.js\");\nconst treeDeep = __webpack_require__(/*! ./object/treeDeep */ \"./src/object/treeDeep.js\");\nconst treeWidth = __webpack_require__(/*! ./object/treeWidth */ \"./src/object/treeWidth.js\");\n\nconst revertstr = __webpack_require__(/*! ./string/revertStr */ \"./src/string/revertStr.js\");\n\n//other\nconst findSimpleNumbers = __webpack_require__(/*! ./other/findSimpleNumbers */ \"./src/other/findSimpleNumbers/index.js\");\nconst polindrome = __webpack_require__(/*! ./other/polindrome */ \"./src/other/polindrome/index.js\");\nconst chess = __webpack_require__(/*! ./other/chess */ \"./src/other/chess/index.js\");\nconst segmentOfArea = __webpack_require__(/*! ./other/segmentOfArea */ \"./src/other/segmentOfArea/index.js\");\nconst bracketsBalance = __webpack_require__(/*! ./other/bracketsBalance */ \"./src/other/bracketsBalance/index.js\");\nconst modules = __webpack_require__(/*! ./other/modules */ \"./src/other/modules/index.js\");\nconst permutation = __webpack_require__(/*! ./other/permutation */ \"./src/other/permutation/index.js\");\nconst polygonConvexity = __webpack_require__(/*! ./other/polygonConvexity */ \"./src/other/polygonConvexity/index.js\");\nconst randomInteger = __webpack_require__(/*! ./other/randomInteger */ \"./src/other/randomInteger/index.js\");\n\nconst findPathByFloid = __webpack_require__(/*! ./other/findPath/byFloid */ \"./src/other/findPath/byFloid/index.js\");\nconst findPathByDijkstra = __webpack_require__(/*! ./other/findPath/byDijkstra */ \"./src/other/findPath/byDijkstra/index.js\");\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("window.defaultArray = [6, 5, 3, -1, 0, -2, 8, 7, 2, 4, -16, 12, 54, 12, 65];\n\n//man\nconst man = __webpack_require__(/*! ./man */ \"./src/man.js\");\n\n// sort\nconst callAllSort = __webpack_require__(/*! ./array/sorts/callAllSort */ \"./src/array/sorts/callAllSort.js\");\nconst bubbleSort = __webpack_require__(/*! ./array/sorts/bubbleSort */ \"./src/array/sorts/bubbleSort.js\");\nconst choiceSort = __webpack_require__(/*! ./array/sorts/choiceSort */ \"./src/array/sorts/choiceSort.js\");\nconst insertSort = __webpack_require__(/*! ./array/sorts/insertSort */ \"./src/array/sorts/insertSort.js\");\nconst mergeSort = __webpack_require__(/*! ./array/sorts/mergeSort */ \"./src/array/sorts/mergeSort.js\");\nconst quickSort = __webpack_require__(/*! ./array/sorts/quickSort */ \"./src/array/sorts/quickSort.js\");\n\n// function\nconst compose = __webpack_require__(/*! ./function/compose */ \"./src/function/compose.js\");\n\n\n// array\nconst polishNotation = __webpack_require__(/*! ./array/polishNotation */ \"./src/array/polishNotation.js\");\nconst reduceArray = __webpack_require__(/*! ./array/reduceArray */ \"./src/array/reduceArray.js\");\nconst arraySpiral = __webpack_require__(/*! ./array/arraySpiral */ \"./src/array/arraySpiral.js\");\nconst getMaxSubSum = __webpack_require__(/*! ./array/getMaxSubSum */ \"./src/array/getMaxSubSum.js\");\nconst binarySearch = __webpack_require__(/*! ./array/binarySearch */ \"./src/array/binarySearch.js\");\n\n// object\nconst revertList = __webpack_require__(/*! ./object/revertList */ \"./src/object/revertList.js\");\nconst treeDeep = __webpack_require__(/*! ./object/treeDeep */ \"./src/object/treeDeep.js\");\nconst treeWidth = __webpack_require__(/*! ./object/treeWidth */ \"./src/object/treeWidth.js\");\n\nconst revertstr = __webpack_require__(/*! ./string/revertStr */ \"./src/string/revertStr.js\");\n\n// other\nconst findSimpleNumbers = __webpack_require__(/*! ./other/findSimpleNumbers */ \"./src/other/findSimpleNumbers/index.js\");\nconst cashMashine = __webpack_require__(/*! ./other/cashMashine */ \"./src/other/cashMashine/index.js\");\nconst polindrome = __webpack_require__(/*! ./other/polindrome */ \"./src/other/polindrome/index.js\");\nconst chess = __webpack_require__(/*! ./other/chess */ \"./src/other/chess/index.js\");\nconst segmentOfArea = __webpack_require__(/*! ./other/segmentOfArea */ \"./src/other/segmentOfArea/index.js\");\nconst bracketsBalance = __webpack_require__(/*! ./other/bracketsBalance */ \"./src/other/bracketsBalance/index.js\");\nconst modules = __webpack_require__(/*! ./other/modules */ \"./src/other/modules/index.js\");\nconst permutation = __webpack_require__(/*! ./other/permutation */ \"./src/other/permutation/index.js\");\nconst polygonConvexity = __webpack_require__(/*! ./other/polygonConvexity */ \"./src/other/polygonConvexity/index.js\");\nconst randomInteger = __webpack_require__(/*! ./other/randomInteger */ \"./src/other/randomInteger/index.js\");\n\nconst findPathByFloid = __webpack_require__(/*! ./other/findPath/byFloid */ \"./src/other/findPath/byFloid/index.js\");\nconst findPathByDijkstra = __webpack_require__(/*! ./other/findPath/byDijkstra */ \"./src/other/findPath/byDijkstra/index.js\");\n\n// temporary\nconst temporary = __webpack_require__(/*! ./temporary */ \"./src/temporary/index.js\");\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -189,6 +266,17 @@ eval("// Обход дерева в ширину\n\nconst myTree = {\n    \"valu
 /***/ (function(module, exports) {
 
 eval("const test_str = '{asda asdadasd (asdasd} 5434534}';\n\nwindow.bracketsBalance = function (str = test_str ) {\n  const stack = [];\n\n  const openBrackets = {\n    '{': true,\n    '(': true,\n    '[': true,\n  };\n\n  const closeBrackets = {\n    '}': '{',\n    ')': '(',\n    ']': '[',\n  };\n\n  for (let i = 0; i < str.length; i++) {\n    if (openBrackets[str[i]]) {\n      stack.push(str[i]);\n      continue;\n    }\n\n    if (closeBrackets[str[i]]) {\n      if (stack[stack.length - 1] === closeBrackets[str[i]]) {\n        stack.pop();\n      } else {\n        console.log(`исходный текст: \"${str}\"`);\n        console.log(`ошибка на позиции ${i}`);\n\n        const resultStr = str.slice(0, i-1);\n        console.log(`ошибка возникла здесь: \"${resultStr}>>${str[i]}<<\"`);\n\n        return;\n      }\n    }\n  }\n\n  if (stack.length){\n    console.log('не закрыты все скобки');\n  } else {\n    console.log('ошибок нет');\n  }\n\n};\n\n\n//# sourceURL=webpack:///./src/other/bracketsBalance/index.js?");
+
+/***/ }),
+
+/***/ "./src/other/cashMashine/index.js":
+/*!****************************************!*\
+  !*** ./src/other/cashMashine/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// выдача денег\n\nconst money = 7350;\n\nconst cash = {\n    5000: 0,\n    1000: 2,\n    100: 100,\n    50: 100\n};\n\nconst variable = {\n    5000: 0,\n    1000: 0,\n    100: 0,\n    50: 0\n};\n\nconst M1 = 5000;\nconst M2 = 1000;\nconst M3 = 100;\nconst M4 = 50;\n\nconst getCount = (num, variable) => {\n    if (cash[M1] && (num - M1) >= 0) {\n        variable[M1]+=1;\n        cash[M1]-=1;\n        getCount(num - M1, variable);\n        return\n    }\n\n    if (cash[M2] && (num - M2) >= 0) {\n        variable[M2]+=1;\n        cash[M2]-=1;\n        getCount(num - M2, variable);\n        return\n    }\n\n    if (cash[M3] && (num - M3) >= 0) {\n        variable[M3]+=1;\n        cash[M3]-=1;\n        getCount(num - M3, variable);\n        return\n    }\n\n\n    if (cash[M4] && (num - 50) >= 0) {\n        variable[50]+=1;\n        cash[M4]-=1;\n        getCount(num - 50, variable);\n    }\n};\n\ngetCount(7350, variable);\n\nconsole.log(variable);\nconsole.log(cash);\n\n\n\n//# sourceURL=webpack:///./src/other/cashMashine/index.js?");
 
 /***/ }),
 
@@ -277,7 +365,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _dep
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// const generateNumber = (N) => {\n//     const array = [];\n//\n//     let start = 1;\n//\n//     while (start <= N) {\n//         array.push(start);\n//         start++;\n//     }\n//\n//     return array;\n// };\n//\n// window.permutation = (N = 3) => {\n//     const number = generateNumber(N);\n//     console.log(number);\n// };\n//\n// permutation(3);\n\n//# sourceURL=webpack:///./src/other/permutation/index.js?");
+eval("const generateNumber = (N) => {\n    const array = [];\n\n    let start = 1;\n\n    while (start <= N) {\n        array.push(start);\n        start++;\n    }\n\n    return array;\n};\n\n\nwindow.permutation = (N = 5) => {\n    const numbers = generateNumber(N);\n    const result = [];\n\n    const recursive = (inner, balance) => {\n        if (balance.length === 0) {\n            result.push(inner);\n            return;\n        }\n\n        balance.forEach((elem, ind) => {\n            const newInner = [...inner];\n            const newBalance = [...balance];\n            newInner.push(elem);\n            newBalance.splice(ind,1);\n\n            recursive(newInner, newBalance);\n        })\n\n    };\n\n    recursive([], numbers);\n    console.log(result);\n};\n\n\n\n//# sourceURL=webpack:///./src/other/permutation/index.js?");
 
 /***/ }),
 
@@ -325,72 +413,6 @@ eval("class Draw {\n  constructor() {\n    this.rectCoords = [-250, 250, -250, 2
 
 /***/ }),
 
-/***/ "./src/sorts/bubbleSort.js":
-/*!*********************************!*\
-  !*** ./src/sorts/bubbleSort.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("// пузырьковая сортировка\n\nwindow.bubbleSort = function (arr = [...defaultArray]) {\n    let length = arr.length;\n\n\n    while (length) {\n        sort(arr);\n        length = length - 1;\n    }\n\n    function sort(arr) {\n        for (let i = 0; i < (arr.length - 1); i++) {\n            let val1 = arr[i];\n            let val2 = arr[i+1];\n\n            if (typeof val2 === 'undefined') return;\n\n            if (val1 > val2) {\n                arr[i] = val2;\n                arr[i+1] = val1;\n            }\n        }\n\n    }\n\n    console.log(arr);\n};\n\n//# sourceURL=webpack:///./src/sorts/bubbleSort.js?");
-
-/***/ }),
-
-/***/ "./src/sorts/callAllSort.js":
-/*!**********************************!*\
-  !*** ./src/sorts/callAllSort.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("window.callSortAll = function() {\n  console.log('\\n сортировка bubbleSort');\n  bubbleSort();\n\n  console.log('\\n сортировка choiceSort');\n  choiceSort();\n\n  console.log('\\n сортировка insertSort');\n  insertSort();\n\n  console.log('\\n сортировка mergeSort');\n  mergeSort();\n\n  console.log('\\n сортировка quickSort');\n  quickSort();\n  console.log('\\n');\n};\n\n//# sourceURL=webpack:///./src/sorts/callAllSort.js?");
-
-/***/ }),
-
-/***/ "./src/sorts/choiceSort.js":
-/*!*********************************!*\
-  !*** ./src/sorts/choiceSort.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("window.choiceSort = function (arr = [...defaultArray]) {\n    let length = arr.length;\n\n    function getMaxIndex(arr) {\n        let max = arr[0];\n        let maxInd = 0;\n\n        for (let i = 0; i < length; i++) {\n            if (arr[i] > max) {\n                max = arr[i];\n                maxInd = i;\n            }\n        }\n\n        return maxInd;\n    }\n\n    while(length !== 0) {\n        let maxIndex = getMaxIndex(arr);\n\n        // если максимальный элемент самый последний, пропускаем на след. итерацию\n        if (maxIndex === length) {\n            length = length - 1;\n            continue;\n        }\n\n        // иначе меняем местами\n        const last = arr[length - 1];\n\n        arr[length - 1] = arr[maxIndex];\n        arr[maxIndex] = last;\n\n\n        // теперь ищем максимальный элемент в суженном диапазоне\n        length = length - 1;\n    }\n\n    console.log(arr);\n};\n\n//# sourceURL=webpack:///./src/sorts/choiceSort.js?");
-
-/***/ }),
-
-/***/ "./src/sorts/insertSort.js":
-/*!*********************************!*\
-  !*** ./src/sorts/insertSort.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("window.insertSort = function(arr = [...defaultArray]) {\n    let length = arr.length - 1;\n\n    for (let i = 0; i <= length; i++) {\n        if (i === 0) continue;\n\n        let y = i;\n        while(y) {\n            if (arr[y] < arr[y-1]) {\n                let small = arr[y];\n                arr[y] = arr[y-1];\n                arr[y-1] = small;\n                y -= 1;\n            } else {\n                // предыдущий элемент массива меньше, можно работать со следующийм элементом\n                break;\n            }\n        }\n    }\n\n    console.log(arr);\n};\n\n\n//# sourceURL=webpack:///./src/sorts/insertSort.js?");
-
-/***/ }),
-
-/***/ "./src/sorts/mergeSort.js":
-/*!********************************!*\
-  !*** ./src/sorts/mergeSort.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("window.mergeSort = function( arr = [...defaultArray]) {\n  let result = [];\n\n  // разбили массив на одиночные массивы\n  for (let i = 0; i < arr.length; i+=1) {\n      result.push([arr[i]])\n  }\n\n  // на каждой итерации цикла кол-во элементов массива будет уменьшаться вдвое (т.к. мы соединяем соседние массивы)\n  while (result.length > 1) {\n\n    // массив с новыми соединенными элементами (на каждой итерации исходный массив result будем менять на него)\n    const resultInner = [];\n\n    // проходим по массиву через элемент, параллельно объединяя пары\n    for (let i = 0; i < result.length; i += 2) {\n\n      const leftArr = result[i];    // левый массив\n      const rightArr = result[i+1]; // правый массив\n\n      // массив в который будет складывать отсортированные значения из левого массива и правого.\n      const inner = [];\n\n      // если правого соседа нет, то добавляем левый массив сразу в результат\n      if (!rightArr) {\n        resultInner.push(leftArr);\n        break;\n      }\n\n      // объединяем массивы - \"пары\" до тех пор, пока не закончатся в них элементы\n      while(leftArr.length || rightArr.length) {\n\n        // если элементы закончились в левом массиве, то значит они ещё есть в правом соседе, добавляем оттуда\n        if (leftArr.length === 0) {\n          inner.push(rightArr[0]);\n          rightArr.splice(0, 1);   // удаляем вставленный элемент из правого соседа\n          continue;\n        }\n\n        // если элементы закончились в правом массиве, то значит они ещё есть в левом соседе, добавляем оттуда\n        if (rightArr.length === 0) {\n          inner.push(leftArr[0]);\n          leftArr.splice(0, 1);   // удаляем вставленный элемент из правого соседа\n          continue;\n        }\n\n        // выбираем наименьшее значение из левого и правого массива под индексом 0 и вставляем в промежуточный массив\n        if (leftArr[0] > rightArr[0]) {\n          inner.push(rightArr[0]);\n          rightArr.splice(0, 1)\n        } else {\n          inner.push(leftArr[0]);\n          leftArr.splice(0, 1)\n        }\n      }\n\n      resultInner.push(inner);\n    }\n    result = resultInner;\n  }\n\n  console.log(result[0]);\n};\n\n//# sourceURL=webpack:///./src/sorts/mergeSort.js?");
-
-/***/ }),
-
-/***/ "./src/sorts/quickSort.js":
-/*!********************************!*\
-  !*** ./src/sorts/quickSort.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("window.quickSort = function() {\n\n  function recursive(arr = [...defaultArray]) {\n    if (arr.length === 0) return [];\n\n    const left = [], right = [], pivot = arr[0];\n\n    for (let i = 1; i < arr.length; i++) {\n      if(arr[i] < pivot)\n        left.push(arr[i]);\n      else\n        right.push(arr[i]);\n    }\n\n    return recursive(left).concat(pivot, recursive(right));\n  }\n\n  console.log(recursive());\n};\n\n\n//# sourceURL=webpack:///./src/sorts/quickSort.js?");
-
-/***/ }),
-
 /***/ "./src/string/revertStr.js":
 /*!*********************************!*\
   !*** ./src/string/revertStr.js ***!
@@ -399,6 +421,17 @@ eval("window.quickSort = function() {\n\n  function recursive(arr = [...defaultA
 /***/ (function(module, exports) {
 
 eval("const defaultStr = '1234 56 78'; // => 78 56 1234\n\nconst revertStr = (str = defaultStr) => {\n    let resultStr = '';\n\n    let to = str.length - 1;\n    let from;\n\n\n    for (let i = (str.length - 1); i >= 0; i-=1) {\n        const el = str[i];\n\n        if (el !== ' ' && i === 0) {\n            from = i;\n\n            while (from <= to) {\n                resultStr += str[from];\n                from += 1;\n            }\n        } else if (el === ' ') {\n            from = i + 1;\n\n            while (from <= to) {\n                resultStr += str[from];\n                console.log(resultStr);\n\n                from += 1;\n            }\n\n            resultStr += ' ';\n\n            to = i - 1;\n        }\n    }\n    console.log(resultStr);\n};\n\n// revertStr();\n\n\nconst reverStr2 = (str = defaultStr) => {\n    const length = str.length - 1;\n\n    let resultArray = [];\n\n    let temporaryArray = [];\n\n    for (let i = length; i >= 0; i-=1) {\n        const el = str[i];\n\n        if (el !== ' ') {\n            temporaryArray.unshift(el);\n        } else {\n            resultArray.push(temporaryArray);\n            temporaryArray = [];\n        }\n\n        if (i === 0) {\n            resultArray.push(temporaryArray);\n        }\n    }\n\n    let resultStr = '';\n\n    resultArray.forEach((arr, ind) => {\n        if (ind === 0) {\n            resultStr += arr.join('');\n        } else {\n            resultStr +=` ${arr.join('')}`;\n        }\n    });\n\n    console.log(resultStr);\n\n    // resultArray = resultArray.map(arr => {\n    //     return arr.join('');\n    // });\n    // console.log(resultArray.join(' '))\n};\n\n// reverStr2();\n\n//# sourceURL=webpack:///./src/string/revertStr.js?");
+
+/***/ }),
+
+/***/ "./src/temporary/index.js":
+/*!********************************!*\
+  !*** ./src/temporary/index.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n\n//# sourceURL=webpack:///./src/temporary/index.js?");
 
 /***/ }),
 
