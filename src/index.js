@@ -21,6 +21,7 @@ const reduceArray = require('./array/reduceArray');
 const arraySpiral = require('./array/arraySpiral');
 const getMaxSubSum = require('./array/getMaxSubSum');
 const binarySearch = require('./array/binarySearch');
+const flatten = require('./array/flatten');
 
 // object
 const revertList = require('./object/revertList');
@@ -37,6 +38,7 @@ const chess = require('./other/chess');
 const segmentOfArea = require('./other/segmentOfArea');
 const bracketsBalance = require('./other/bracketsBalance');
 const modules = require('./other/modules');
+const moneybox = require('./other/moneybox');
 const permutation = require('./other/permutation');
 const polygonConvexity = require('./other/polygonConvexity');
 const randomInteger = require('./other/randomInteger');
