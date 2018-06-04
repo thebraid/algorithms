@@ -57,45 +57,64 @@
 // console.log(cash);
 
 const cash = {
-    15000: 30,
-    13000: 30,
-    7000: 30,
+    15000: 10,
+    13000: 10,
+    7000: 10,
 };
 
 class CashMachine {
     constructor() {
         this.cash = cash;
+        this.step = null;
+        this.start = null;
+    }
+
+    clear() {
+        this.cash = Object.create(null);
     }
 
     getMoney(value) {
-        const transaction = Object.create(null);
+        this.init();
+        let cloneCash = this.cash;
+        let start = this.start;
 
-        const [...money] = Object.keys(this.cash).sort((a, b) => b - a);
+        const result = Object.create(null);
+        const tempCashKeys = Object.keys(cloneCash); // 15000, 13000, 7000
 
-        money.forEach(m => {
-            while(value > m) {
-                if (!transaction[m]) {
-                    transaction[m] = 0;
-                }
+        while(start <= 20000) {
+            const keyResult = Object.keys(result); // 7000, 13000, 14000...
 
-
-                transaction[m] += 1;
-                value -= m;
+            if (!keyResult.length) {
+                result[start] = [start];
+                cloneCash[start] -= 1;
+                start += this.step;
+                continue;
             }
 
-            // проверка, есть ли остаток = 0  через другие номиналы
+            if (cloneCash[start]) {
+                result[start] = [start];
+                cloneCash[start] -= 1;
+                start += this.step;
+                continue;
+            }
 
-            // console.log(value);
-        });
+            // нету такого ключа, пытаемся подобрать.
+            for (let i = 0; i < tempCashKeys.length; i++) {
+                const currentCash = Number(tempCashKeys[i]);
 
-        // console.log(money);
-        // console.log(transaction);
+                if (result[start - currentCash] && (start - currentCash >= 0)) {
+                    cloneCash[currentCash] -= 1;
+                    console.log(start);
+                    // console.log(currentCash);
+                    result[start] = result[start - currentCash].concat(currentCash);
+                    break;
+                }
+            }
 
-    }
+            start += this.step;
+        }
 
-    _hasRemainder(value) {
-        let maxMoney = null;
-
+        console.log(cloneCash);
 
     }
 
@@ -106,9 +125,39 @@ class CashMachine {
 
         this.cash[nominal] += count;
     }
+
+    setStep() {
+        const cashKeys = Object.keys(this.cash).sort((a, b) => a - b);
+
+        // элемент с которого начинаем находить значения
+        this.start = Number(cashKeys[0]);
+
+        // если только 1 номинал банкнот, то шаг = номиналу банкноты
+        if (cashKeys.length === 1) {
+            this.step = cashKeys[0];
+            return;
+        }
+
+        const min = cashKeys[0];
+        const nextMin = cashKeys[1];
+
+        if (nextMin % min === 0) {
+            this.step = Number(min);
+        } else if (nextMin % min >= 1000){
+            this.step = 1000;
+        } else {
+            this.step = nextMin % min;
+        }
+    }
+
+    init() {
+        this.setStep();
+    }
 }
 
 const cashMachine = new CashMachine();
-// cashMachine.addMoney(7000, 30);
-// cashMachine.addMoney(7000, 20);
-cashMachine.getMoney(68000);
+// cashMachine.init();
+//
+// cashMachine.addMoney(15000, 0);
+// // cashMachine.addMoney(7000, 20);
+// cashMachine.getMoney(68000);
