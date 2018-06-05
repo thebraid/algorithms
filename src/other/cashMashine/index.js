@@ -131,7 +131,7 @@ cashMachine.init();
 
 // cashMachine.addMoney(15000, 0);
 // // cashMachine.addMoney(7000, 20);
-cashMachine.getMoney(6000);
+// cashMachine.getMoney(6000);
 
 
 

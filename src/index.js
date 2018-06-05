@@ -42,6 +42,7 @@ const moneybox = require('./other/moneybox');
 const permutation = require('./other/permutation');
 const polygonConvexity = require('./other/polygonConvexity');
 const randomInteger = require('./other/randomInteger');
+import other from './other';
 
 const findPathByFloid = require('./other/findPath/byFloid');
 const findPathByDijkstra = require('./other/findPath/byDijkstra');
